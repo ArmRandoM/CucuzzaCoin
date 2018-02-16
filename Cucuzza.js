@@ -170,15 +170,14 @@ contract Cucuzza is owned, ERC20{
   }
 
   /**
-   * Transfer the total balance froma an address amounts to an another address.
+   * Transfer the total balance to another address.
    *
-   * @param _from the address of the sender
    * @param _to the address of the recipient
    */
-  function giveAllCuzFrom( address _from, address _to ) payable public returns (bool){
+  function giveAllCuz( address _to ) payable public returns (bool){
       // All Cucuzza forming the balance of the sender
-      uint256 balanceToTransfer = balances[_from];
-      return transferFrom( _from, _to, balanceToTransfer );
+      uint256 balanceToTransfer = balances[msg.sender];
+      return transfer( _to, balanceToTransfer );
   }
 
   /**
