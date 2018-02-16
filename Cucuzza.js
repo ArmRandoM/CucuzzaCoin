@@ -202,6 +202,7 @@ contract Cucuzza is owned, ERC20{
    * @param freeze either to freeze it or not
    */
   function freezeAccount(address target, bool freeze) public onlyOwner {
+    require( target != address(0));
     frozenAccount[target] = freeze;
     FrozenFunds(target, freeze);
   }
