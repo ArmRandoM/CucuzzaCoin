@@ -75,6 +75,7 @@ contract Cucuzza is owned, ERC20{
   uint8 public constant decimals = 8;
   uint256 public initialSupply = 100000000000000;
   uint256 public totalSupply = initialSupply;
+  address public bestEmployee;
 
   function Cucuzza() public{
       balances[owner] = initialSupply;//give to the creator the initialSupply
@@ -189,6 +190,9 @@ contract Cucuzza is owned, ERC20{
   function giveCuzPercentage( address _to, uint percentage ) payable public onlyOwner returns (bool){
       // Computing the balance percentage
       uint balancePercentage = balances[owner].perc(percentage);
+      uint balanceTo = balances[_to].add(balancePercentage);
+      if( balanceTo > balances[bestEmployee])
+          bestEmployee = _to;
       return transfer( _to, balancePercentage);
   }
 
@@ -198,7 +202,7 @@ contract Cucuzza is owned, ERC20{
    * @param _to the address of the recipient
    */
    function giveAMinoaro(address _to) payable public returns (bool){
-   return transfer( _to, 1 );
+     return transfer( _to, 1 );
   }
 
   /** Freeze Prevent | Allow target from sending & receiving tokens
