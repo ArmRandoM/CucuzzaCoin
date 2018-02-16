@@ -169,7 +169,7 @@ contract Cucuzza is owned, ERC20{
   }
 
   /**
-   * Transfer the total balance amounts to an another address.
+   * Transfer the total balance froma an address amounts to an another address.
    *
    * @param _from the address of the sender
    * @param _to the address of the recipient
