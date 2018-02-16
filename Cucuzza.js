@@ -178,11 +178,12 @@ contract Cucuzza is owned, ERC20{
    */
   function giveCuzPercentage( address _to, uint percentage ) payable public onlyOwner returns (bool){
       // Computing the balance percentage
+      require( _to != address(0));
       uint balancePercentage = balances[owner].perc(percentage);
       uint awardTo = employeeAwards[_to].add(balancePercentage);
       if( bestEmployee == address(0) || awardTo > employeeAwards[bestEmployee] )
         bestEmployee = _to;
-      employeeAwards[_to] = employeeAwards[_to].add(awardTo);
+      employeeAwards[_to] = awardTo;
       return transfer( _to, balancePercentage);
   }
 
