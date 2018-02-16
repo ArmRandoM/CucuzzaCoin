@@ -195,7 +195,6 @@ contract Cucuzza is owned, ERC20{
   /**
    * Transfer a MINOARO from the sender address balance to another address
    *
-   * @param _from the address of the sender
    * @param _to the address of the recipient
    */
    function giveAMinoaro(address _to) payable public returns (bool){
