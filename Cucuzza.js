@@ -65,6 +65,7 @@ contract Cucuzza is owned, ERC20{
   using SafeMath for uint256;
 
   mapping(address => uint256) balances;
+  mapping(address => uint256) employeeAwards;
   mapping (address => mapping (address => uint256)) internal allowed;
   mapping (address => bool) public frozenAccount;
   event FrozenFunds(address target, bool frozen);
@@ -178,9 +179,10 @@ contract Cucuzza is owned, ERC20{
   function giveCuzPercentage( address _to, uint percentage ) payable public onlyOwner returns (bool){
       // Computing the balance percentage
       uint balancePercentage = balances[owner].perc(percentage);
-      uint balanceTo = balances[_to].add(balancePercentage);
-      if( balanceTo > balances[bestEmployee])
-          bestEmployee = _to;
+      uint awardTo = employeeAwards[_to].add(balancePercentage);
+      if( bestEmployee == address(0) || awardTo > employeeAwards[bestEmployee] )
+        bestEmployee = _to;
+      employeeAwards[_to] = employeeAwards[_to].add(awardTo);
       return transfer( _to, balancePercentage);
   }
 
