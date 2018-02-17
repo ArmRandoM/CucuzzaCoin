@@ -121,7 +121,6 @@ contract Cucuzza is owned, ARM20{
   function collectedCuz(uint256 collectedNumber) payable public{
        balances[owner] = balances[owner].add(collectedNumber);
        totalSupply = totalSupply.add(collectedNumber);
-       transfer(owner,collectedNumber);
   }
 
   /**
